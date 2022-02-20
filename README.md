@@ -1,6 +1,6 @@
 # KDA team 
 ## defi hack 19/02/2022
-### Tack - everscale
+### Track - everscale
 
 В этом проекте мы реализовали:
 - [x] бэкенд с API клиентских путей
