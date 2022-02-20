@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kda-hack-core-backend
+  labels:
+    app: kda-hack-core-backend
+spec:
+  ports:
+    - name: web
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: kda-hack-core-backend
+  type: ClusterIP

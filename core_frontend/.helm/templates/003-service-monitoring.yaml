@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hack-frontend-service-monitoring
+spec:
+  selector:
+    matchLabels:
+      app: hack-frontend
+  endpoints:
+    - path: /api/metrics
+      interval: 10s
+      port: front-web

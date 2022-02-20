@@ -1,0 +1,6 @@
+configVersion: 1
+project: kda-hack-core-backend
+---
+image: core_backend
+dockerfile: Dockerfile
+context: .

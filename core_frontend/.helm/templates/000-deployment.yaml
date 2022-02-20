@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hack-frontend
+  labels:
+    app: hack-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hack-frontend
+  template:
+    metadata:
+      labels:
+        app: hack-frontend
+    spec:
+      containers:
+        - name: hack-frontend
+          image: {{ .Values.werf.image.core_frontend }}
+          ports:
+            - name: front-web
+              containerPort: 3000
+      imagePullSecrets:
+        - name: regcred

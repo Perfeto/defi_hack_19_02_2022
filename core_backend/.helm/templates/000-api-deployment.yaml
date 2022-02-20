@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kda-hack-core-backend
+  labels:
+    app: kda-hack-core-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kda-hack-core-backend
+  template:
+    metadata:
+      labels:
+        app: kda-hack-core-backend
+    spec:
+      containers:
+        - name: kda-hack-core-backend
+          image: {{ .Values.werf.image.core_backend }}
+          ports:
+            - name: web
+              containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            failureThreshold: 8
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 100
+            periodSeconds: 100
+            timeoutSeconds: 1
+            failureThreshold: 3
+      imagePullSecrets:
+        - name: regcred

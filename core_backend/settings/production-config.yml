@@ -1,0 +1,1 @@
+database_dsn: !ENV ${DATABASE_DSN}

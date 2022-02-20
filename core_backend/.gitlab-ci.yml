@@ -1,0 +1,33 @@
+stages:
+  - build
+  - deploy
+  - cleanup
+
+before_script:
+  - type trdl && . $(trdl use werf 1.2 stable)
+  - type werf && source $(werf ci-env gitlab --as-file)
+
+Build and Publish:
+  stage: build
+  script:
+    - werf build
+  except: [schedules]
+  tags: [werf]
+
+Deploy to Production:
+  stage: deploy
+  script:
+    - werf converge --skip-build --env prod
+  dependencies:
+    - Build and Publish
+  tags: [werf]
+  except: [schedules]
+  only: [master]
+
+Cleanup:
+  stage: cleanup
+  script:
+    - docker login -u nobody -p ${WERF_IMAGES_CLEANUP_PASSWORD} ${WERF_REPO}
+    - werf cleanup
+  only: [schedules]
+  tags: [werf]
