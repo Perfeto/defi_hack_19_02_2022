@@ -1,5 +1,5 @@
-# KDA team 
-## defi hack 19/02/2022
+# METAPLACE team 
+## defi hack 25/02/2022
 ### Track - everscale
 
 В этом проекте мы реализовали:
